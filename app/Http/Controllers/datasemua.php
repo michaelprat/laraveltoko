@@ -1,15 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\detail;
-use App\penjualan;
-use App\kategori;
-use App\pelanggan;
-use App\produk;
 
 use Illuminate\Http\Request;
-
-class utama extends Controller
+use App\penjualan;
+use App\pelanggan;
+use App\detail;
+use App\produk;
+use App\kategori;
+class datasemua extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,14 +16,12 @@ class utama extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-   
-      $tampung=pelanggan::paginate(1,['*'],'pelanggan');
-      $tampung1=kategori::paginate(1,['*'],'kategori');
-      $tampung2=produk::with('kategori')->paginate(3,['*'],'produk');
-      $tampung3=penjualan::with('pelanggan')->paginate(3,['*'],'penjualan');
-      $tampung4=detail::all();
-       return view('halamanutamatoko')->with('pelanggan',$tampung)->with('kategori',$tampung1)->with('produk',$tampung2)->with('penjualan',$tampung3)->with('detail',$tampung4);
+    {   $tampung=pelanggan::all();
+        $tampung1=kategori::all();
+        $tampung2=produk::all();
+        $tampung3=penjualan::all();
+        $tampung4=detail::all();
+        return view('halamantampilsemua')->with('pelanggan',$tampung)->with('kategori',$tampung1)->with('produk',$tampung2)->with('penjualan',$tampung3)->with('detail',$tampung4);
     }
 
     /**

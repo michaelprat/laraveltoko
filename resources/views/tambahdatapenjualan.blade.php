@@ -381,6 +381,26 @@
                             </tr>
 
 						
+						<tr>
+						   <div class="control-group">
+						<td>	{!! Form::label('id_produk','Pilih  produk:',array('class'=>"control-label",'for'=>"typeahead"))!!}	</td> 
+						<td>	<div class="controls">
+							 {!! Form::select('id_produk', $produk, null, ['placeholder' => 'Pilih produk']) !!}
+							  </div>
+                            </td>
+							  </div>
+							   </tr>
+
+                               	   <tr>
+							<div class="control-group">
+							<td> {!! Form::label('jumlah','Masukan jumlah:',array('class'=>"control-label",'for'=>"typeahead"))!!}
+							<td>  
+							<div class="controls">
+                            {!! Form::text('jumlah',null,array('placeholder'=>"isi jumlah ")) !!}
+							  </div>
+                               </td>
+							</div>
+                            </tr>
 						
 						        </table>
 							

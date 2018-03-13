@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\penjualan;
 use App\pelanggan;
+use App\detail;
+use App\produk;
 
 class datapenjualan extends Controller
 {
@@ -26,7 +28,8 @@ class datapenjualan extends Controller
     public function create()
     {
         $pelanggan=pelanggan::pluck('nama_pelanggan','id');
-        return view('tambahdatapenjualan')->with('pelanggan',$pelanggan);
+        $produk=produk::pluck('nama_produk','id');
+        return view('tambahdatapenjualan')->with('pelanggan',$pelanggan)->with('produk',$produk);
     }
 
     /**
@@ -41,9 +44,28 @@ class datapenjualan extends Controller
         [
                   'id_pelanggan'=>'required|max:255|min:1',
                   'tanggal_beli'=>'required|date',
+                  'jumlah'=>'required|numeric',
+                  'id_produk'=>'required',
+                   
                 
         ]);
-   penjualan::create($request->all());
+      
+             $penjualan=new penjualan;
+             $penjualan->id_pelanggan=$request->id_pelanggan;
+             $penjualan->tanggal_beli=$request->tanggal_beli;
+             $penjualan->save();
+             $detail=new detail;
+             $id_produk=$request->id_produk;
+            $detail->id_penjualan=$penjualan->id; 
+            $hargabarang=produk::find($id_produk)->harga;
+            $jumlah= $request->jumlah;
+            $hasil=$jumlah*$hargabarang;
+            $detail->id_produk=$request->id_produk;
+            $detail->jumlah=$request->jumlah;
+             $detail->total=$hasil;
+             $detail->save();
+      
+
      return redirect()->route("home.index");
     }
 
@@ -67,8 +89,12 @@ class datapenjualan extends Controller
     public function edit($id)
     {
         $find=penjualan::find($id);
+       $datadetail=detail::select('id')->where('id_penjualan', $id)->value('id');
+       $detail=detail::find($datadetail);
         $pelanggan = pelanggan::pluck('nama_pelanggan', 'id');
-        return view('halamaneditpenjualan')->with('data',$find)->with('pelanggan',$pelanggan);
+         
+        $produk=produk::pluck('nama_produk','id');
+        return view('halamaneditpenjualan')->with('data',$find)->with('pelanggan',$pelanggan)->with('produk',$produk)->with('detail',$detail);
     }
 
     /**
@@ -88,8 +114,28 @@ class datapenjualan extends Controller
                  
     
             ]);
-            penjualan::find($id)->update($request->all());  //find=where data $id hasil lemparan dari halaman lain
-            return redirect()->route("home.index");
+           
+
+            $penjualan=penjualan::find($id);
+            $penjualan->id_pelanggan=$request->id_pelanggan;
+            $penjualan->tanggal_beli=$request->tanggal_beli;
+            $penjualan->save();
+            $datadetail=detail::select('id')->where('id_penjualan', $penjualan->id)->value('id');
+            $detail=detail::find($datadetail);
+            $id_produk=$request->id_produk;
+           $hargabarang=produk::find($id_produk)->harga;
+           $jumlah= $request->jumlah;
+           $hasil=$jumlah*$hargabarang;
+         
+           $detail->id_produk=$request->id_produk;
+           $detail->jumlah=$request->jumlah;
+          $detail->total=$hasil;
+          $detail->save();
+        
+
+
+
+          return redirect()->route("home.index");
     }
 
     /**
@@ -101,6 +147,8 @@ class datapenjualan extends Controller
     public function destroy($id)
     {
         penjualan::destroy($id);
+        $datadetail=detail::select('id')->where('id_penjualan', $id)->value('id');
+        detail::destroy($datadetail);
         return redirect()->route("home.index");
     }
 }

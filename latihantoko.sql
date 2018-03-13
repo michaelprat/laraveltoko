@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2018 at 09:30 AM
+-- Generation Time: Mar 13, 2018 at 06:07 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -43,7 +43,12 @@ CREATE TABLE `details` (
 --
 
 INSERT INTO `details` (`id`, `id_penjualan`, `id_produk`, `jumlah`, `total`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 302, 9060000, '2018-03-13 01:20:10', '2018-03-13 01:28:53');
+(5, 8, 2, 40, 8000000, '2018-03-13 06:31:42', '2018-03-13 06:31:42'),
+(6, 9, 1, 2, 60000, '2018-03-13 06:35:11', '2018-03-13 06:35:11'),
+(7, 10, 1, 30, 900000, '2018-03-13 07:32:08', '2018-03-13 07:32:08'),
+(8, 11, 1, 10, 300000, '2018-03-13 07:32:58', '2018-03-13 09:00:58'),
+(9, 12, 1, 3, 90000, '2018-03-13 07:37:08', '2018-03-13 07:37:08'),
+(10, 13, 1, 2, 60000, '2018-03-13 10:01:13', '2018-03-13 10:01:13');
 
 -- --------------------------------------------------------
 
@@ -64,7 +69,8 @@ CREATE TABLE `kategoris` (
 
 INSERT INTO `kategoris` (`id`, `nama_kategori`, `created_at`, `updated_at`) VALUES
 (1, 'Kecap', '2018-03-12 23:44:09', '2018-03-12 23:44:20'),
-(2, 'Sabun', '2018-03-12 23:59:38', '2018-03-12 23:59:38');
+(2, 'Sabun', '2018-03-12 23:59:38', '2018-03-12 23:59:38'),
+(3, 'Makanan', '2018-03-13 01:43:31', '2018-03-13 01:43:31');
 
 -- --------------------------------------------------------
 
@@ -145,7 +151,12 @@ CREATE TABLE `penjualans` (
 --
 
 INSERT INTO `penjualans` (`id`, `id_pelanggan`, `tanggal_beli`, `created_at`, `updated_at`) VALUES
-(1, 2, '2018-03-13', '2018-03-13 00:26:53', '2018-03-13 00:28:23');
+(8, 2, '2018-03-13', '2018-03-13 06:31:42', '2018-03-13 06:31:42'),
+(9, 3, '2018-03-13', '2018-03-13 06:35:11', '2018-03-13 06:35:11'),
+(10, 2, '2018-04-13', '2018-03-13 07:32:08', '2018-03-13 07:32:08'),
+(11, 2, '2018-03-13', '2018-03-13 07:32:58', '2018-03-13 09:01:21'),
+(12, 2, '2018-03-13', '2018-03-13 07:37:08', '2018-03-13 07:37:08'),
+(13, 2, '1991-12-01', '2018-03-13 10:01:13', '2018-03-13 10:01:13');
 
 -- --------------------------------------------------------
 
@@ -167,7 +178,8 @@ CREATE TABLE `produks` (
 --
 
 INSERT INTO `produks` (`id`, `nama_produk`, `harga`, `id_katagori`, `created_at`, `updated_at`) VALUES
-(1, 'Lux', 30000, 1, '2018-03-13 00:00:40', '2018-03-13 00:13:18');
+(1, 'Lux', 30000, 1, '2018-03-13 00:00:40', '2018-03-13 00:13:18'),
+(2, 'Bangau', 200000, 1, '2018-03-13 01:42:57', '2018-03-13 01:42:57');
 
 -- --------------------------------------------------------
 
@@ -247,13 +259,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `details`
 --
 ALTER TABLE `details`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `kategoris`
 --
 ALTER TABLE `kategoris`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -271,13 +283,13 @@ ALTER TABLE `pelanggans`
 -- AUTO_INCREMENT for table `penjualans`
 --
 ALTER TABLE `penjualans`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `produks`
 --
 ALTER TABLE `produks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -318,8 +318,7 @@
 					
 					
 						<li>{!! link_to(route('home.index'),"Tabel data")!!}</li>
-						<li>{!! link_to(route('all.index'),"Tabel data semua")!!}</li>
-				
+                        <li>{!! link_to(route('all.index'),"Tabel data semua")!!}</li>
 					</ul>
 				</div>
 			</div>
@@ -338,43 +337,65 @@
 		
 		
 			<div class="row-fluid sortable">
-				<div class="box span6">
+				<div class="box span8">
 					<div class="box-header">
-						<h2><i class="halflings-icon white align-justify"></i><span class="break"></span>Tabel pelanggan</h2>
+						<h2><i class="halflings-icon white align-justify"></i><span class="break"></span>Tabel Keseluruhan</h2>
 			
 					</div>
 					<div class="box-content">
 						<table class="table">
 							  <thead>
 								  <tr>
-									  <th>Id pelanggan</th>
+                                      <th>Tanggal Pembelian</th>
 									  <th>Nama pelanggan</th>
-									  <th>Edit</th>                     
-									  <th>Delete</th>                     
+									  <th>Nama Produk</th>                     
+									  <th>Kategori</th>
+                                      <th>Harga Satuan</th>
+                                      <th>Jumlah Pembelian</th>
+                                      <th>Harga Total</th>                     
 								  </tr>
 							  </thead>   
 							  <tbody>
-							  @foreach($pelanggan as $tampil)
-							  
-								<tr>
-				
-				              <td>{!!$tampil->id!!}</td>
-							 <td>{!! $tampil->nama_pelanggan !!}</td>
-				            <td>{!! link_to(route('pelanggan.edit',$tampil->id),'Edit') !!}</td>
-				            <td>{!! Form::open(array('route'=>array('pelanggan.destroy',$tampil->id),'method'=>'delete')) !!}
-					        {!! Form::submit('Delete',array("onclick"=>"return confirm('are you sure?')")) !!}
-					          {!! Form::close() !!}
-					          </td>
-		
-		                 	</tr>
-		                 	@endforeach
+						  @foreach($penjualan as $tampil)
+                              @foreach($detail as $tampil4)
+                            
+                         
+                   
+                              <tr>
+                            	@if($tampil4->id_penjualan==$tampil->id)  
+				                   <td>{!!$tampil->tanggal_beli!!}</td>
+                                   @foreach($pelanggan as $tampil2)
+                                   @if($tampil->id_pelanggan==$tampil2->id)
+							        <td>{!! $tampil2->nama_pelanggan !!}</td>
+                                    @endif
+                                   @endforeach
+                                   @foreach($produk as $tampil3)
+                                   @if($tampil4->id_produk==$tampil3->id)
+                                    <td>{!! $tampil3->nama_produk !!}</td>
+                                    @endif
+                                    @endforeach
+                                    @foreach($kategori as $tampil5)
+                                    @if($tampil3->id_katagori==$tampil5->id)
+                                    <td>{!! $tampil5->nama_kategori !!}</td>
+                                    @endif
+                                    @endforeach
+                                    @foreach($produk as $tampil3)
+                                   @if($tampil4->id_produk==$tampil3->id)
+                                    <td>{!! $tampil3->harga !!}</td>
+                                    @endif
+                                    @endforeach
+                                    <td>{!!$tampil4->jumlah!!}</td>
+                                    <td>{!!$tampil4->total!!}</td>
+                           
+                              @endif
+                              </tr>
+                                
+		              
+                             @endforeach
+                             @endforeach
 							            
 							  </tbody>
 						 </table>  
-						 <div class="pagination pagination-centered">
-						
-							{{$pelanggan->appends(['kategori' => $kategori->currentPage(),'produk' => $produk->currentPage(),'penjualan' => $penjualan->currentPage()])->links()}}
-							 </div>       
 							
                     </div>
 				
@@ -383,219 +404,7 @@
 		
 			
 
-		
-    
-
 	</div>{{--/.fluid-container--}}
-	{!! link_to(route('pelanggan.create'),"Tambah data Pelanggan")!!}
-			
-
-	<br>
-	</br>
-	<div class="row-fluid sortable">
-				<div class="box span6">
-					<div class="box-header">
-						<h2><i class="halflings-icon white align-justify"></i><span class="break"></span>Tabel kategori</h2>
-			
-					</div>
-					<div class="box-content">
-						<table class="table">
-							  <thead>
-								  <tr>
-									  <th>Id Kategori</th>
-									  <th>Nama Kategori</th>
-									  <th>Edit</th>                     
-									  <th>Delete</th>                     
-								  </tr>
-							  </thead>   
-							  <tbody>
-							  @foreach($kategori as $tampil)
-							  
-								<tr>
-				
-				              <td>{!!$tampil->id!!}</td>
-							 <td>{!! $tampil->nama_kategori !!}</td>
-						    <td>{!! link_to(route('kategori.edit',$tampil->id),'Edit') !!}</td>
-				            <td>{!! Form::open(array('route'=>array('kategori.destroy',$tampil->id),'method'=>'delete')) !!}
-					        {!! Form::submit('Delete',array("onclick"=>"return confirm('are you sure?')")) !!}
-					          {!! Form::close() !!}
-					          </td>
-		
-		                 	</tr>
-		                 	@endforeach
-							 <tr>
-							 <td>
-							 </tr>                           
-							  </tbody>
-						 </table>  
-						 <div class="pagination pagination-centered">
-						
-		
-						 {{$kategori->appends(['pelanggan' => $pelanggan->currentPage(),'produk' => $produk->currentPage(),'penjualan' => $penjualan->currentPage()])->links()}}
-
-
-							 </div>       
-							
-					
-                    </div>
-				
-				</div>{{--/span--}}
-			
-		
-			
-
-		
-    
-
-	</div>{{--/.fluid-container--}}
-	{!! link_to(route('kategori.create'),"Tambah data kategori")!!}
-
-
-
-
-
-<br>
-	</br>
-	<div class="row-fluid sortable">
-				<div class="box span6">
-					<div class="box-header">
-						<h2><i class="halflings-icon white align-justify"></i><span class="break"></span>Tabel produk</h2>
-			
-					</div>
-					<div class="box-content">
-						<table class="table">
-							  <thead>
-								  <tr>
-									  <th>Id Produk</th>
-									  <th>Nama Produk</th>
-									  <th>Harga Produk</th>
-									  <th>Kategori</th>
-									  <th>Edit</th>                     
-									  <th>Delete</th>                     
-								  </tr>
-							  </thead>   
-							  <tbody>
-							  @foreach($produk as $tampil)
-							  
-								<tr>
-				
-				              <td>{!!$tampil->id!!}</td>
-							 <td>{!! $tampil->nama_produk !!}</td>
-							 <td>{!! $tampil->harga !!}</td>
-							 <td>{!! $tampil->kategori->nama_kategori !!}</td>
-						    <td>{!! link_to(route('produk.edit',$tampil->id),'Edit') !!}</td>
-				            <td>{!! Form::open(array('route'=>array('produk.destroy',$tampil->id),'method'=>'delete')) !!}
-					        {!! Form::submit('Delete',array("onclick"=>"return confirm('are you sure?')")) !!}
-					          {!! Form::close() !!}
-					          </td>
-		
-		                 	</tr>
-		                 	@endforeach
-							 <tr>
-							 <td> 
-							 </tr>               
-							  </tbody>
-						 </table>  
-						 <div class="pagination pagination-centered">
-						 {{$produk->appends(['pelanggan' => $pelanggan->currentPage(),'kategori' => $kategori->currentPage(),'penjualan' => $penjualan->currentPage()])->links()}}
-
-
-							 </div>       
-							
-					
-                    </div>
-				
-				</div>{{--/span--}}
-			
-		
-			
-
-		
-    
-
-	</div>{{--/.fluid-container--}}
-	{!! link_to(route('produk.create'),"Tambah data Produk")!!}
-
-
-
-
-
-
-
-
-<br>
-	</br>
-	<div class="row-fluid sortable">
-				<div class="box span7">
-					<div class="box-header">
-						<h2><i class="halflings-icon white align-justify"></i><span class="break"></span>Tabel Penjualan</h2>
-			
-					</div>
-					<div class="box-content">
-						<table class="table">
-							  <thead>
-								  <tr>
-									  <th>Id Penjualan</th>
-									  <th>Nama Pelanggan</th>
-									  <th>Tanggal Pembelian</th>
-									  <th>Id Produk</th>
-									  <th>Jumlah</th>
-									  <th>Total</th>
-									  <th>Edit</th>                     
-									  <th>Delete</th>                     
-								  </tr>
-							  </thead>   
-							  <tbody>
-							  
-							@foreach($penjualan as $tampil)
-						       	@foreach($detail as $tampil2)
-								<tr> 	
-						@if($tampil2->id_penjualan==$tampil->id)
-						
-							    <td>{!! $tampil->id!!}</td>
-							    <td>{!! $tampil->pelanggan->nama_pelanggan!!}</td>
-							   <td>{!! $tampil->tanggal_beli!!}</td>
-							   <td>{!! $tampil2->produk->id!!}</td>
-							   <td>{!! $tampil2->jumlah!!}</td>
-							    <td>{!! $tampil2->total!!}</td>
-								<td>{!! link_to(route('penjualan.edit',$tampil->id),'Edit') !!}</td>
-				            <td>{!! Form::open(array('route'=>array('penjualan.destroy',$tampil->id),'method'=>'delete')) !!}
-					        {!! Form::submit('Delete',array("onclick"=>"return confirm('are you sure?')")) !!}
-					          {!! Form::close() !!}
-					          </td>
-							 @else
-						
-							
-							 </tr>
-							 @endif
-						  
-							 @endforeach
-							 @endforeach
-		                 	
-							
-							  </tbody>
-						 </table>  
-
-					
-						 <div class="pagination pagination-centered">
-						
-						 {{$penjualan->appends(['pelanggan' => $pelanggan->currentPage(),'kategori' => $kategori->currentPage(),'produk' => $produk->currentPage()])->links()}}
-							
-							 </div>      
-                    </div>
-				
-				</div>{{--/span--}}
-			
-		
-			
-
-		
-    
-
-	</div>{{--/.fluid-container--}}
-	{!! link_to(route('penjualan.create'),"Tambah data penjualan")!!}
-
-
 
 
 
@@ -691,3 +500,7 @@
 	
 </body>
 </html>
+
+
+
+

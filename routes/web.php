@@ -21,3 +21,4 @@ Route::resource('detail','datadetail');
 Route::resource('penjualan','datapenjualan');
 Route::resource('kategori','datakategori');
 Route::resource('pelanggan','datapelanggan');
+Route::resource('all','datasemua');
