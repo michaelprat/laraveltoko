@@ -18,7 +18,7 @@ class datasemua extends Controller
     public function index()
     {  
         $tampung4=detail::join('penjualans', 'details.id_penjualan', '=', 'penjualans.id')
-        ->join('pelanggans', 'penjualans.id', '=', 'pelanggans.id')
+        ->join('pelanggans', 'penjualans.id_pelanggan', '=', 'pelanggans.id')
         ->join('produks', 'details.id_produk', '=', 'produks.id')
         ->join('kategoris', 'produks.id_katagori', '=', 'kategoris.id')
         ->get();

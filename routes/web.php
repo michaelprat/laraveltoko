@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('halamansignup');
 });
 
 Route::resource('home','utama');
@@ -22,3 +22,8 @@ Route::resource('penjualan','datapenjualan');
 Route::resource('kategori','datakategori');
 Route::resource('pelanggan','datapelanggan');
 Route::resource('all','datasemua');
+Route::get('signup','UsersController@signup')->name('signup');
+Route::post('signup','UsersController@signup_store')->name('signup.store');
+Route::get('login','SessionController@login')->name('login');
+Route::post('login','SessionController@login_store')->name('login.store');
+Route::get('logout','SessionController@logout')->name('logout');

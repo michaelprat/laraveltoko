@@ -285,9 +285,12 @@
 						</li>
 						
 						{{-- start: User Dropdown --}}
+						@if(Sentinel::check())
 						<li class="dropdown">
+					
+		
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-								<i class="halflings-icon white user"></i> Michael Pratama
+								<i class="halflings-icon white user"></i>Welcome {!! Sentinel::getUser()->first_name !!}
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
@@ -295,9 +298,26 @@
  									<span>Account Settings</span>
 								</li>
 								<li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
-								<li><a href="login.html"><i class="halflings-icon off"></i> Logout</a></li>
+								<li>{!! link_to(route('logout'),'Logout')!!}</li>
 							</ul>
 						</li>
+						@else
+						<li class="dropdown">
+					     	<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+						      <i class="halflings-icon white user"></i>Welcome Guest
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+								<li class="dropdown-menu-title">
+ 									<span>Account Settings</span>
+								</li>
+								<li>{!! link_to(route('signup'),'signup')!!}</li>
+								<li>{!! link_to(route('login'),'Login')!!}</li>
+							</ul>
+						</li>
+	                  @endif
+		
+
 					{{-- end: User Dropdown --}}
 					</ul>
 				</div>
