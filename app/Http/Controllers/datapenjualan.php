@@ -120,8 +120,7 @@ class datapenjualan extends Controller
             $penjualan->id_pelanggan=$request->id_pelanggan;
             $penjualan->tanggal_beli=$request->tanggal_beli;
             $penjualan->save();
-            $datadetail=detail::select('id')->where('id_penjualan', $penjualan->id)->value('id');
-            $detail=detail::find($datadetail);
+             $detail=detail::find($penjualan->id);
             $id_produk=$request->id_produk;
            $hargabarang=produk::find($id_produk)->harga;
            $jumlah= $request->jumlah;
