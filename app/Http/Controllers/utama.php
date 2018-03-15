@@ -22,8 +22,9 @@ class utama extends Controller
       $tampung=pelanggan::paginate(1,['*'],'pelanggan');
       $tampung1=kategori::paginate(1,['*'],'kategori');
       $tampung2=produk::with('kategori')->paginate(3,['*'],'produk');
+
       $tampung3=penjualan::with('pelanggan')->paginate(3,['*'],'penjualan');
-      $tampung4=detail::all();
+     $tampung4=detail::all();
        return view('halamanutamatoko')->with('pelanggan',$tampung)->with('kategori',$tampung1)->with('produk',$tampung2)->with('penjualan',$tampung3)->with('detail',$tampung4);
     }
 
