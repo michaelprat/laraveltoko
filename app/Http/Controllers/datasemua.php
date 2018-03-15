@@ -16,10 +16,7 @@ class datasemua extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   $tampung=pelanggan::all();
-        $tampung1=kategori::all();
-        $tampung2=produk::all();
-        $tampung3=penjualan::all();
+    {  
         $tampung4=detail::join('penjualans', 'details.id_penjualan', '=', 'penjualans.id')
         ->join('pelanggans', 'penjualans.id', '=', 'pelanggans.id')
         ->join('produks', 'details.id_produk', '=', 'produks.id')
