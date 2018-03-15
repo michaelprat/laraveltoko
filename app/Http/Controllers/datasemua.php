@@ -20,8 +20,13 @@ class datasemua extends Controller
         $tampung1=kategori::all();
         $tampung2=produk::all();
         $tampung3=penjualan::all();
-        $tampung4=detail::all();
-        return view('halamantampilsemua')->with('pelanggan',$tampung)->with('kategori',$tampung1)->with('produk',$tampung2)->with('penjualan',$tampung3)->with('detail',$tampung4);
+        $tampung4=detail::join('penjualans', 'details.id_penjualan', '=', 'penjualans.id')
+        ->join('pelanggans', 'penjualans.id', '=', 'pelanggans.id')
+        ->join('produks', 'details.id_produk', '=', 'produks.id')
+        ->join('kategoris', 'produks.id_katagori', '=', 'kategoris.id')
+        ->get();
+        return view('halamantampilsemua')->with('detail',$tampung4);
+        //with('pelanggan',$tampung)->with('kategori',$tampung1)->with('produk',$tampung2)->with('penjualan',$tampung3)->with('detail',$tampung4);
     }
 
     /**

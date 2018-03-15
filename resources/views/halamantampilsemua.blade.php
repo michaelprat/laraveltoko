@@ -356,42 +356,19 @@
 								  </tr>
 							  </thead>   
 							  <tbody>
-						  @foreach($penjualan as $tampil)
-                              @foreach($detail as $tampil4)
-                            
-                         
-                   
+								 
+						  @foreach($detail as $tampil)
                               <tr>
-                            	@if($tampil4->id_penjualan==$tampil->id)  
-				                   <td>{!!$tampil->tanggal_beli!!}</td>
-                                   @foreach($pelanggan as $tampil2)
-                                   @if($tampil->id_pelanggan==$tampil2->id)
-							        <td>{!! $tampil2->nama_pelanggan !!}</td>
-                                    @endif
-                                   @endforeach
-                                   @foreach($produk as $tampil3)
-                                   @if($tampil4->id_produk==$tampil3->id)
-                                    <td>{!! $tampil3->nama_produk !!}</td>
-                                    @endif
-                                    @endforeach
-                                    @foreach($kategori as $tampil5)
-                                    @if($tampil3->id_katagori==$tampil5->id)
-                                    <td>{!! $tampil5->nama_kategori !!}</td>
-                                    @endif
-                                    @endforeach
-                                    @foreach($produk as $tampil3)
-                                   @if($tampil4->id_produk==$tampil3->id)
-                                    <td>{!! $tampil3->harga !!}</td>
-                                    @endif
-                                    @endforeach
-                                    <td>{!!$tampil4->jumlah!!}</td>
-                                    <td>{!!$tampil4->total!!}</td>
+								  <td>{!!$tampil->tanggal_beli!!}</td>
+                                  <td>{!! $tampil->nama_pelanggan !!}</td>
+                                <td>{!! $tampil->nama_produk !!}</td>
+                                    <td>{!! $tampil->nama_kategori !!}</td>
+                                    <td>{!! $tampil->harga !!}</td>
+                                    <td>{!!$tampil->jumlah!!}</td>
+                                    <td>{!!$tampil->total!!}</td>
                            
-                              @endif
                               </tr>
                                 
-		              
-                             @endforeach
                              @endforeach
 							            
 							  </tbody>
